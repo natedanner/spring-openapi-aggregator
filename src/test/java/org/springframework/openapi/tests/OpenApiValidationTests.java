@@ -29,7 +29,7 @@ import io.swagger.v3.parser.core.models.SwaggerParseResult;
 
 public class OpenApiValidationTests {
 
-	private ObjectMapper mapper = Json.mapper();
+	private final ObjectMapper mapper = Json.mapper();
 
 	@Test
 	public void testValidate() throws Exception {

@@ -20,7 +20,7 @@ public class AutoconfigurationTests {
 	public void withoutSpringdoc() {
 		ApplicationContextRunner contextRunner = new ApplicationContextRunner()
 			.withConfiguration(AutoConfigurations.of(OpenApiAggregatorConfiguration.class))
-			.withBean(OpenApiAggregatorSpecs.class, () -> new OpenApiAggregatorSpecs())
+			.withBean(OpenApiAggregatorSpecs.class, OpenApiAggregatorSpecs::new)
 			.withClassLoader(new FilteredClassLoader(OpenAPIService.class));
 		contextRunner.run(context -> {
 			assertThat(context.getBeanNamesForType(OpenApiAggregator.class)).isNotEmpty();
@@ -33,7 +33,7 @@ public class AutoconfigurationTests {
 		ReactiveWebApplicationContextRunner contextRunner = new ReactiveWebApplicationContextRunner()
 			.withConfiguration(AutoConfigurations.of(OpenApiAggregatorConfiguration.class, SpringDocConfiguration.class,
 					SpringDocConfigProperties.class, WebFluxAutoConfiguration.class))
-			.withBean(OpenApiAggregatorSpecs.class, () -> new OpenApiAggregatorSpecs());
+			.withBean(OpenApiAggregatorSpecs.class, OpenApiAggregatorSpecs::new);
 		contextRunner.run(context -> {
 			assertThat(context.getBeanNamesForType(OpenApiAggregator.class)).isNotEmpty();
 			assertThat(context.getBeanNamesForType(OpenAPIService.class)).isNotEmpty();
@@ -46,7 +46,7 @@ public class AutoconfigurationTests {
 		ReactiveWebApplicationContextRunner contextRunner = new ReactiveWebApplicationContextRunner()
 			.withConfiguration(
 					AutoConfigurations.of(OpenApiAggregatorConfiguration.class, WebFluxAutoConfiguration.class))
-			.withBean(OpenApiAggregatorSpecs.class, () -> new OpenApiAggregatorSpecs())
+			.withBean(OpenApiAggregatorSpecs.class, OpenApiAggregatorSpecs::new)
 			.withClassLoader(new FilteredClassLoader(OpenAPIService.class));
 		contextRunner.run(context -> {
 			assertThat(context.getBeanNamesForType(OpenApiAggregator.class)).isNotEmpty();

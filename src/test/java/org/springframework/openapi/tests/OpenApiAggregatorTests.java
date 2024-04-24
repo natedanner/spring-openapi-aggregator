@@ -35,9 +35,9 @@ import io.swagger.v3.parser.core.models.SwaggerParseResult;
 
 public class OpenApiAggregatorTests {
 
-	private ObjectMapper mapper = Json.mapper();
+	private final ObjectMapper mapper = Json.mapper();
 
-	private OpenAPI base = new OpenAPI();
+	private final OpenAPI base = new OpenAPI();
 
 	{
 		base.setInfo(new Info().title("Test").version("v0"));
